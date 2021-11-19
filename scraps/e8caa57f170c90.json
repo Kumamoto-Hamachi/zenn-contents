@@ -1,0 +1,13 @@
+{
+  "title": "vagrant upの際のエラー解決",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-03-19",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-03-19",
+      "body_markdown": "```\nThere was an error while executing `VBoxManage`, a CLI used by Vagrant                                  ├───────────────────────────────────────────────────────────────────────────────────────────────────────\nfor controlling VirtualBox. The command and stderr is shown below.                                      │[kuma R6.1]$ cd ../\n                                                                                                        │[kuma 6.1hoge]$ svn st\nCommand: [\"startvm\", \"3ec0629d-ff3c-403f-860d-17d1fd2770ae\", \"--type\", \"headless\"]                      │svn: warning: W155007: '/Users/kuma/kairos3/6.1hoge' は作業コピーではありません\n                                                                                                        │[kuma 6.1hoge]$ cd R6.1\nStderr: VBoxManage: error: The virtual machine 'ubu_default_1616144198838_87510' has terminated unexpect│[kuma R6.1]$ cd automated_test/\nedly during startup with exit code 1 (0x1)                                                              │[kuma automated_test]$ cd Kairos3_automated_test/\nVBoxManage: error: Details: code NS_ERROR_FAILURE (0x80004005), component MachineWr\n```\n\nエラーの内容としては、「Vagrantが、VirtualBoxをVBoxManageを使って実行する際にエラーが発生しました。そのコマンドとstderr（標準エラー出力）は、以下の通りです」"
+    }
+  ]
+}

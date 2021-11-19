@@ -1,0 +1,19 @@
+{
+  "title": "業務で苦しんだSubversionの記録",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-01-22",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-01-22",
+      "body_markdown": "今の職場がまだSubversionを使っており、中々苦労しているので下記にまとめていく。\n※つい先日まで元気に動いてくれていたgit-svnくんはSVN::Coreが動かなくなり無事死亡しました()\n\n## .gitignoreのように非管理化のファイルを記述したい。\n非管理であることをコミットしないなら下記(Mac)\n~/.subversion/config\n\n```\n# 下記をアンコメント\nglobal-ignores = *.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo __pycache__\n```\n\n例えばjetbrains系のエディタを使っていると.ideaファイルなどが混入することがあるので上記にそのまま`*.idea`を追加してしまいましょう。\n\n## git diffと同じことをしたい\n\n```\n$ svn diff\n```\n\n色合いをgit diffと同様にしたいならまずHomebrewを使ってcolordiffを入れて\n\n```\n$ brew install colordiff\n```\n\nconfigに下記を追加。\n\n```\ndiff-cmd = colordiff\n```\n\n## git statusと同じことをしたい\n\n```\n$ svn status\n```\n\n## git checkout HEAD PATHと同じことをしたい\n\n```\n$ svn revert PATH\n```\n\n## git fetch + git merge / git pullと同じことをしたい\n\n```\n$ svn update\n```\n\n## git logと同じことをしたい\n\n```\n$ svn log\n```\n\nlogが長すぎぃ！となった場合は下記のように.txtファイルに書き込むなどすると良い。\n\n```\n$ svn log > ~/Desktop/log.txt\n```\n\n上記が打つの面倒なので私は.bashrcに下記のようなaliasを設定しています。\n\n```\nalias sl=\"svn log > ~/Desktop/log.txt; view ~/Desktop/log.txt\"\n```\n\nまたlogのRevisionがわかったらより詳しくみたいというときは\n\n```\n$ svn log -r Revision番号 -v --diff\n```\n\n※-vで変更のあったファイルを、--diffで変更差分を表示\n\n## git commit / git pushと同じことをしたい\nターミナルから行う場合は先に環境変数$SVN_EDITORを設定\n\n```\n-- .bashrcなどに設定すると良い\nexport SVN_EDITOR=vim\n```\n\nまた、先にsvn updateをしておいたほうが良い。\n\n```\nsvn update .\n```\n\n```\nsvn commit ファイルパス\n```\n\n## git cloneと同じことをしたい\n\n```\nsvn checkout svn+ssh:://パス ~/パス/ディレクトリ\n```\n\n## [git checkout <コミット>](https://qiita.com/Kashiwara/items/ecdf309afa11d87e84e8)したい(一時的に過去に戻りたい)\n\n```\nsvn up -r リビジョン番号\n```\n\n```\nsvn info\n```\n上記で現在のリビジョンを確認することも出来ます。\n\n最新のバージョンに戻るには\n\n```\nsvn up\n```",
+      "body_updated_at": "2021-02-15"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-02-01",
+      "body_markdown": "## SVN、卒業の時「git-svn」を導入する\n"
+    }
+  ]
+}

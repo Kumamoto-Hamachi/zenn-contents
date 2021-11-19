@@ -1,0 +1,24 @@
+{
+  "title": "Linuxコマンド+bashあれこれ",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-01-06",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-01-06",
+      "body_markdown": "## 指定ファイル以外削除\n\n```\n ls | grep -v \"指定ファイル\" | xargs rm -rf\n```\n\n"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-01-06",
+      "body_markdown": "## bashあれこれ\nコンテストのファイルの整理用スクリプト\na.pyがないのにaディレクトリが出来たりしないように調整している\n\n```\natcoder_array=(\"a\" \"b\" \"c\" \"d\" \"e\" \"f\")\nfor i in \"${atcoder_array[@]}\"\ndo\n\tif test ! -e ${i} -a -e ${i}*.py ; then\n\t\techo \"${i}\"\n\t\tmkdir \"${i}\"\n\tfi\n\tif test -e ${i}*.py ; then\n\t\tmv ${i}*.py ${i}/\n\tfi\ndone\n```"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-02-26",
+      "body_markdown": "## [タイムゾーンを日本の時間に](https://zenn.dev/kumamoto/articles/51bf0893620f0c)",
+      "body_updated_at": "2021-02-28"
+    }
+  ]
+}

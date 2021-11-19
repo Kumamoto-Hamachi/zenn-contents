@@ -1,0 +1,13 @@
+{
+  "title": "Vagrantのエラー「Vagrant was unable to mount VirtualBox shared folders.  」を解決",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-03-25",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-03-25",
+      "body_markdown": "```\nVagrant was unable to mount VirtualBox shared folders. This is usually\nbecause the filesystem \"vboxsf\" is not available. This filesystem is\nmade available via the VirtualBox Guest Additions and kernel module.\nPlease verify that these guest additions are properly installed in the\nguest. This is not a bug in Vagrant and is usually caused by a faulty\nVagrant box. For context, the command attempted was:\n\nmount -t vboxsf -o uid=1000,gid=1001 vagrant /vagrant\n\nThe error output from the command was:\n\n/sbin/mount.vboxsf: mounting failed with the error: No such device\n\n```\n\nvagrant sshは接続可能。\nVirtualBoxには、VirtualBox Guest Addition がインストールされている。\n⇒ VirtualBox Guest Addition = ゲスト(Guest Additions)\n自分の環境にあるホスト(VirtualBox)には、デフォルトの設定により仮想マシン(VM)起動時にバージョンが古ければ自動更新される。\nそのため、起動時にホスト(VirtualBox)のみバージョン更新されるので、\nホスト(VirtualBox)のバージョンとホスト(VirtualBox)にインストールされているゲスト(Guest Additions)のバージョン間に差異が生じバージョン不一致によるマウントエラーが起きる。\n\n## 解決方法\n```\n$ vagrant plugin install vagrant-vbguest\n```"
+    }
+  ]
+}

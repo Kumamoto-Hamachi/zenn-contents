@@ -1,0 +1,13 @@
+{
+  "title": "[データ構造のお勉強]Pythonで双方向連結リストを実装",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-03-31",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-03-31",
+      "body_markdown": "とりあえずコードを\n```\nimport sys\n\nclass Node:\n    def __init__(self, value):\n        self.value = value\n        self.prev = None\n        self.next = None\n\n\nclass TwoWayLinkedList:\n    def __init__(self):\n        self.head = None\n\n    def print(self):\n        print(\"#\" * 10)\n        if self.head is None:\n            sys.exit(\"List is empty\")\n        cursor = self.head\n        while True:\n            print(cursor.value)\n            if cursor.next == self.head:\n                break\n            cursor = cursor.next\n\n    def reverse_print(self):\n        print(\"#\" * 10)\n        if self.head is None:\n            sys.exit(\"List is empty\")\n        cursor = self.head.prev\n        while True:\n            print(cursor.value)\n            if cursor.prev == self.head.prev:\n                break\n            cursor = cursor.prev\n\n    def add_head(self, value):\n        node = Node(value)\n        if self.head is None:\n            self.head = node\n            self.head.prev = node\n            # node.prev = node\n            self.head.next = node\n            # node.next = node\n            return\n        # 新規追加データのポインタ更新\n        node.prev = self.head.prev  # 新しい頭の前は既存の頭の前(継続お尻)\n        node.next = self.head  # 新しい頭の次は既存の頭\n        # リスト内の既存データのポインタ更新\n        self.head.prev.next = node  # 継続お尻の次は頭\n        self.head.prev = node  # 既存の頭の前は新しい頭\n        self.head = node  # 頭の書き換え\n\n    def add_tail(self, value):\n        node = Node(value)\n        if self.head is None:\n            self.head = node\n            self.head.prev = node\n            # node.prev = node\n            self.head.next = node\n            # node.next = node\n            return\n        # 新規追加データのポインタ更新\n        node.prev = self.head.prev  # 新しいお尻の前は旧お尻\n        node.next = self.head  # 新しいお尻の次は既存の頭\n        # リスト内の既存データのポインタ更新(self.tailがないからadd_headより書き換え少ない)\n        self.head.prev.next = node  # 継続の頭の前(旧お尻)の次は新しいお尻\n        self.head.prev = node  # 継続の頭の前は新しいお尻\n\n\nif __name__ == \"__main__\":\n    two_way_list = TwoWayLinkedList()\n    two_way_list.add_head(1)\n    two_way_list.print()\n    two_way_list.add_head(2)\n    two_way_list.print()\n    two_way_list.add_head(3)\n    two_way_list.print()\n    two_way_list.add_head(4)\n    two_way_list.print()\n    two_way_list.add_tail(0)\n    two_way_list.print()\n    two_way_list.add_tail(1)\n    two_way_list.print()\n    two_way_list.reverse_print()\n    two_way_list.add_tail(2)\n    two_way_list.print()\n\n```"
+    }
+  ]
+}

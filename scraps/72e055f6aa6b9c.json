@@ -1,0 +1,20 @@
+{
+  "title": "メール配送の仕組みを調べる",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-02-28",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-02-28",
+      "body_markdown": "## メール配送の仕組み概観\n- 参考1：[メールサーバのしくみ OSS推進フォーラム](http://ossforum.jp/node/566)\n- 参考2：[SMTPリレーとは!? 今さら聞けないメール配信の基礎知識](https://baremetal.jp/blog/2017/12/08/468/)\n- 参考3：[Linux - MTA / MDA / MUA](https://www.infraeye.com/study/linuxz47.html)\n- 参考4：[Ubuntuでメールサーバー構築](https://qiita.com/mizuki_takahashi/items/1b33e1f679359827c17d)\n\n- MTA(Message Transfer Agent)\nメール配送プログラム。クライアントからのメールを受信したり、MTA間で転送したりMDAに配送する機能のこと。\nSMTPプロトコルでやり取りするためSMTPサーバーとも呼ばれる。\n代表的なものはsendmailやPostfix、eximなど。\n- MDA(Mail Delivery Agent)\nMTAによって配送されたメールを受信者ごとに配送する機能のこと。\n- MUA(Mail User Agent)\nメールクライアントソフトウェア。『ユーザのフロントエンドとして、電子メールの表示や読み書き、そしてメールサーバへの送信やサーバの自分のメールボックスからのメールの受信に専念するプログラム』[電子メール（MTAとMUA）](http://atnetwork.info/tcpip2/tcpip228.html)\n- プロトコル\nクライアントから送信されたメールはSMTPプロトコルをリレーして目的のメールサーバに送信される。クライアントはサーバに届いたメールをPOPプロトコルやIMAPプロトコルを介して読み出す\n- SMTP(Simple Mail Transfer Protocol)\nMTA 間の転送や、MUA からMTAへのメール送信に使われるプロトコル。電子メールを転送するプロトコルである。通常\nTCP のポート番号 25 を利用する。\n- POP3(Post Office Protocol)\nユーザがMTAからMUAに自分のメールを読み出す際に使用する、メール受信用プロトコル。現在は、POP3（POP Version 3）が使用され、TCPのポート番号110番を利用する。\n- IMAP（Internet Message Access Protocol）\nMTA上のメールにアクセスし操作するためのプロトコル。POPではMUAを使用して自分のメールをダウンロードするが、IMAPではサーバ上にメールを保存したまま操作を行う。通常、IMAP4 はIMAP Version 4 revision 1(IMAP4rev1) のことを示し、TCPのポート番号143番を利用する。\n\n\n![](https://storage.googleapis.com/zenn-user-upload/6dzh1mp67zheep5h387io6jrquoe)\n\n\n(1)MUAで作成で作成したメールを送信用MTAへ送る\n(2)MTAはメールアドレスから配送先メールアドレスを調べメールをMTAへ送る\n(3)MTAがメールを受け取り、ローカル配送プログラムであるMDAがメールの宛先となっているユーザーのメールボックにメールを格納\n(4)受取人側はPOPサーバーやIMPAサーバーを経由して、自分のメールボックスからメールを取り出す。\n\n## どのMTAプログラムがインストールされているのかを確認する\n\n```\nnetstat -atnp | grep 25\n```",
+      "body_updated_at": "2021-02-28"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-02-28",
+      "body_markdown": "## 補足\n\n### netstatコマンドとは\n※参考：[netstatコマンドの使い方、初心者に必要なことだけを説明する](https://network-beginners-handbook.com/netstat/)\n※参考2：[netstatコマンドとは？](https://www.atmarkit.co.jp/ait/articles/1412/10/news003.html)\nnetstatとは「通信状況を表示できるネットワークコマンド」のこと。「実行するコンピュータが、どのコンピュータとどんなプロトコルを使って何番ポートで通信しているか」がわかる。\n\n主なオプションは\n\n- -a\n(アクティブなコネクションでない)UDPの通信状況も確認出来る\n\n- -n\nプロトコル名やホスト名が数値表示。(表示までの時間短縮に繋がる)\nなど\n\n\n\n\n\n",
+      "body_updated_at": "2021-02-28"
+    }
+  ]
+}

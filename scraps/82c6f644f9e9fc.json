@@ -1,0 +1,38 @@
+{
+  "title": "Macでmanコマンドの出力を日本語/英語切り替え出来るようにする",
+  "closed": true,
+  "archived": true,
+  "created_at": "2020-12-22",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-22",
+      "body_markdown": "## groffのインストール\n[groff](https://en.wikipedia.org/wiki/Groff_(software))とは雑に言えば「テキストを処理して整形するプログラム」のこと。\n下記のようにMacに最初から入ってはいるが、\n```\n$ groff -v\nGNU groff version 1.19.2\n$ which groff\n/usr/bin/groff\n```\n最新版にしよう。\n```\n$ brew install groff\n$ groff -v\nGNU groff version 1.22.4\n$ which groff\n/usr/local/bin/groff\n```",
+      "body_updated_at": "2020-12-23"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-22",
+      "body_markdown": "## manの設定を変更\n\n```\n$ sudo vi /etc/man.conf\n\n# 95-96行目あたりの下記をコメントアウトして\nJNROFF\t\t/usr/bin/groff -Tnippon -mandocj -c\n# 代わりにこれを\nJNROFF /usr/local/bin/groff -Dutf8 -Tutf8 -mandoc -mja -E\n\n# 105-106行目あたりの下記２つをコメントアウトして\nPAGER\t\t/usr/bin/less -is\nBROWSER\t\t/usr/bin/less -is\n# 代わりにこれを\nPAGER /usr/bin/less -isr\nBROWSER /usr/bin/less -isr\n\n```",
+      "body_updated_at": "2020-12-23"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-22",
+      "body_markdown": "## JM Projectから日本語manページをダウンロードしてくる\n※最新版はここで[チェック](http://linuxjm.osdn.jp/download.html)の上、curlコマンドでダウンロードしてみてください。\n\n※What does curl stand for?(カールとは何の省略なのか?)\n->[Client URL](https://en.wikipedia.org/wiki/CURL#:~:text=cURL%20(pronounced%20'curl'),was%20first%20released%20in%201997.)\n※その他参考\n->[curlコマンドの使い方15選](https://news.mynavi.jp/article/20180821-680632/)\n\nちなみにcurlコマンドとは様々なプロトコル(HTTPやFTPなど標準はHTTP1.1)でファイルをダウンロード/転送するコマンド。今回はダウンロードに使用しています。\n```\n$ cd ~/Downloads\n$ curl -O http://linuxjm.osdn.jp/アーカイブ名\n-- 例\n$ curl -O http://linuxjm.osdn.jp/man-pages-ja-20201215.tar.gz\n```\n※-oは標準出力に代わって、出力をファイル file へ書き込むことオプション\n※-Oも標準出力に代わって、出力をファイル file へ書き込むことオプションだがリモートファイルと同じ名前でローカルのファイルが作られる\n\nファイルを解凍します。\n```\n$ tar xfz アーカイブ名\n-- 例\n$ tar xfz man-pages-ja-20201215.tar.gz\n-- ちゃんと解凍されてますネ\n$ ls | grep man\nman-pages-ja-20201215\nman-pages-ja-20201215.tar.gz\n```\n※[tar](https://www.atmarkit.co.jp/ait/articles/1608/15/news015.html)とは「アーカイブファイル”を作成／展開するコマンド」です。ディレクトリ圧縮はtar cvf、解凍はtar xvfです。\n\n\n続いて、解凍したディレクトリに移動して、makeを実行します。\n```\n$ cd man-pages-ja-20201215\n$ ls\nINSTALL  Makefile README   manual   script\n$ make config\nInstall directory   [/usr/share/man/ja_JP.UTF-8] ?: /\n=> /usr/local/share/man/ja_JP.UTF-8(/usr/local/share/manを見ればわかるがすでにmanの説明ファイルが置かれている)\ncompress manual with..\n      0: none\n      1: gzip\n      2: bzip2\n      3: compress\n=> 0(圧縮方法を効かれているので圧縮しないを選択)\nuname of page owner [root] ?: \n=>Macのユーザー名(homebrewを使っていないならrootで良い)\ngroup of page owner [root] ?: \n=>admin(homebrewを使っていないならwheelで良い)\n\nAll OK? (Yes, [C]ontinue / No, [R]eselect) : \n=>c(問題なければc、やり直ししたければrを回答。)\n\n[INSTALL PACKAGE SELECTION]\n->全てYしてEnterでおｋ\nAll OK? (Yes, [C]ontinue / No, [R]eselect) :\n->c\n[RESOLVE CONFLICTS]\n->全て0してEnterでおk\nAll OK? (Yes, [C]ontinue / No, [R]eselect) :\n->c\ncreating installation script...done\nnow you can \"make install\" as user root.\n\n$ make install\n```\n※ [make](https://manual.atmark-techno.com/dist/atmark-dist_developers_guide_ja-1.0.11/ch05.html#:~:text=make%E3%81%AF%E3%80%81%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB,%E5%91%BC%E3%81%B0%E3%82%8C%E3%82%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%A7%E3%81%99%E3%80%82)は、プログラムをコンパイルするためののコマンド。どのソースコードをどのようにコンパイルすれば良いかを判断し、コンパイルに必要なコマンドを実行してくれます。makeを使うにはMakefileと呼ばれるファイルが必要となる。\n※Makefileはコンパイルされるソースコードの依存関係や、コンパイルに必要なコマンドなどの情報が書かれている。",
+      "body_updated_at": "2020-12-23"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-22",
+      "body_markdown": "## こぼれ話\n\n- gitのようなhomebrewで後から入れた方を使っているコマンドの場合\n/usr/**local**/share/manに入っていることに注目。ユーザーは**Macのユーザー名**、グループは**admin**となっている。\n```\n$ which git\n/usr/local/bin/git\n$ man -w git\n/usr/local/share/man/man1/git.1\n$ ls -l /usr/local/share/man/man1/git.1\nlrwxr-xr-x  1 Macのユーザー名  admin  47 12 10 02:03 git.1 -> ../../../Cellar/git/2.29.2/share/man/man1/git.1\n```\n※gitは元から入っているがhomebrewで入れたものをPATHを通して使っている場合上記のようになる。treeコマンドとかでも一緒。\n\n- lsやcdのような元から入っているコマンドの場合\nいずれも/usr/**share**/下のディレクトリにあります。またユーザーは**root**、グループは**wheel**となっている。\n```\n$ which ls\n/bin/ls\n$ man -w ls\n/usr/share/man/man1/ls.1\n$ ls -l /usr/share/man/man1/ls.1\n-rw-r--r--  1 root  wheel  17047  2 29  2020 /usr/share/man/man1/ls.1\n$ which cd \n/usr/bin/cd\n$ man -w cd\n/usr/share/man/man1/builtin.1\n$ ls -l \n-rw-r--r--  1 root  wheel  8714  2 29  2020 /usr/share/man/man1/builtin.1\n```",
+      "body_updated_at": "2020-12-22"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-22",
+      "body_markdown": "## 日本語、英語のman記事を同じ環境で\n.bashrcに下記を追記\n```\nalias man='env LANG=C man'\nalias jman='env LANG=ja_JP.UTF-8 man'\n```\n\nこれでmanを日本語にしたい時は`jman`コマンドを使用する。\n※LANG=Cの意味については[【Linux入門】ローカライゼーションのためのロケール情報設定方法](https://eng-entrance.com/linux-localization-locale)を参照すること。",
+      "body_updated_at": "2020-12-23"
+    }
+  ]
+}

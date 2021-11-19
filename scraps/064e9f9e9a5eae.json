@@ -1,0 +1,19 @@
+{
+  "title": "[Python]requirements.txtを\"楽に\"作って、\"楽に\"必要なライブラリをインストール！",
+  "closed": false,
+  "archived": false,
+  "created_at": "2020-12-15",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-15",
+      "body_markdown": "# 基本\n## requirements.txtとは？\n\n## requirements.txtを利用してパッケージを入れる\n\n## requirements.txtを作る \n```\npip freeze > ./requirements.txt\n```\n\n## requirements.txtを\"楽に\"作る \n```\npip install pipreqs\npipreqs .\n```"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-15",
+      "body_markdown": "# 参考\n[User Guide pip documentation](https://pip.pypa.io/en/latest/user_guide/#requirements-files)\n[bndr/pipreqs GitHuB](https://github.com/bndr/pipreqs)",
+      "body_updated_at": "2020-12-15"
+    }
+  ]
+}

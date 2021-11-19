@@ -1,0 +1,13 @@
+{
+  "title": "[Git]わざとrabaseやmergeでconflictを起こしてトラブル対策の練習をしてみる",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-04-18",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-04-18",
+      "body_markdown": "# 下記あとで清書\nmain-develop-feature\ndevelopにoptがpushしていてそれを自分がまだmainしかないときにpullするとorigin/developができるだけで\n自動でdevelopが斬られるわけではない=>git cb developしてmergeすべき\n\n先にfeatureを切る\n同じ時期にoptがdevelopにpushしている\n\ndevelopに戻ってpullする\n\n[kumamoto gitrouble2]$ git rebase develop\nAuto-merging main.txt\nCONFLICT (content): Merge conflict in main.txt\nerror: could not apply 6c12741... update/1\nResolve all conflicts manually, mark them as resolved with\n\"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nYou can instead skip this commit: run \"git rebase --skip\".\nTo abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nCould not apply 6c12741... update/1\n\n\n[kumamoto gitrouble2]$ git br -a\n* (no branch, rebasing feature/kuma)\n  develop\n  feature/kuma\n  main\n  remotes/origin/develop\n  remotes/origin/main\n\n\n[kumamoto gitrouble2]$ git st\ninteractive rebase in progress; onto f5bd5eb\nLast command done (1 command done):\n   pick 6c12741 update/1\nNext commands to do (2 remaining commands):\n   pick f9afead update/2\n   pick 024b150 update/3\n  (use \"git rebase --edit-todo\" to view and edit)\nYou are currently rebasing branch 'feature/kuma' on 'f5bd5eb'.\n  (fix conflicts and then run \"git rebase --continue\")\n  (use \"git rebase --skip\" to skip this patch)\n  (use \"git rebase --abort\" to check out the original branch)\n\nUnmerged paths:\n  (use \"git restore --staged <file>...\" to unstage)\n  (use \"git add <file>...\" to mark resolution)\n        both modified:   main.txt\n\n<<<<<<< HEAD\npiyopiyo\n=======\nupdate1\n>>>>>>> 6c12741 (update/1)\n\n修正\ngit add hoge\ngit rebase --continue\n\ngit rebase -i\n\n\nrebaseして怒られが発生したら\n[kumamoto gitrouble2]$ git rebase --abort\n[kumamoto gitrouble2]$ git rebase -i\n\ndevelopから3つコミットしてたら\n[kumamoto gitrouble2]$ git rebase -i HEAD^^^\n\n# p, pick <commit> = use commit\n# r, reword <commit> = use commit, but edit the commit message\n# e, edit <commit> = use commit, but stop for amending\n# s, squash <commit> = use commit, but meld into previous commit\n\ne 67adc24 update1\ns abab223 update2\ns c5d1ca9 update3\n\nsquash\ngit rebase --continueしてsqush終わらせた\nここでようやくrebase developができる\n"
+    }
+  ]
+}

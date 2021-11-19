@@ -1,0 +1,13 @@
+{
+  "title": "MySQL気づき",
+  "closed": false,
+  "archived": false,
+  "created_at": "2020-11-25",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2020-11-25",
+      "body_markdown": "## [なければINSERT、あればスキップ（IGNORE〜）のおすすめ](https://hit.hateblo.jp/entry/MYSQL/SQL/IGNORE)\n\n"
+    }
+  ]
+}

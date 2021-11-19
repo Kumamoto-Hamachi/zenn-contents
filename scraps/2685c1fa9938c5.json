@@ -1,0 +1,18 @@
+{
+  "title": "postgresqlの知識メモ",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-04-06",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-04-06",
+      "body_markdown": "- セットアップ(amazon linux2上)\nhttps://techviewleo.com/install-postgresql-12-on-amazon-linux/\n\n- psqlのアップデート(応急処置的なのでもっと良い方法を探す)\nhttp://l-light-note.hatenablog.com/entry/2016/06/27/094217\n\n- postgresqlチュートリアル(at CentOS7)\nhttps://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-centos-7"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-04-06",
+      "body_markdown": "- PostgreSQL 超入門　第1回\nhttps://lets.postgresql.jp/documents/tutorial/postgresql-abc/1-1\n"
+    }
+  ]
+}

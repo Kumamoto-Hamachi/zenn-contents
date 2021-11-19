@@ -1,0 +1,19 @@
+{
+  "title": "[目標]Tex/LaTeXを素早く学んで最低限の使いこなしをする",
+  "closed": true,
+  "archived": true,
+  "created_at": "2020-12-31",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-31",
+      "body_markdown": "![](https://storage.googleapis.com/zenn-user-upload/ctyg8u29b4mgzs0koo1b1xn2plyv)\n\n# はじめに LaTeX/TeXとは何か？\n\nTeXとは[TeX Wiki](https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80)によれば『文字や図版などの要素を紙面に配置する」』ためのものだという。これに対してLaTeXとはTeXを使いやすくするための便利機能を付与したものだと思えばいいだろう。\n\n筆者は競プロの勉強まとめをオンラインに上げる際に数式を書くのを楽にするために導入しようと勉強を始めた。\n\n# MacにMacTeXを入れてみる\n[MacTeX](http://tug.org/mactex/)とは『TEX を使うための標準的なファイル一式をまとめたものであり、TEXの環境を簡単な操作のみで用意することが主な機能』が入ったソフトウェア群のこと。(by [Wikipedia](https://ja.wikipedia.org/wiki/MacTeX))\n\nリンク先からダウンロードしても良いが、今回はhomebrewで入れてやる。\n※homebrewとはMac OSでディファクトスタンダードなパッケージマネージャー。ソフトウェアのインストールやバージョンのアップグレード/ダウングレードを簡単にするためのツールです。\n\n- homebrewの導入\n[公式](https://brew.sh/index_ja)より下記をターミナル にコピペしてEnterしちゃってください。\n```\n$ /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"\n```\n\n- homebrew-caskの導入\n~~[homebrew-cask](https://github.com/Homebrew/homebrew-cask)とはGUIのアプリもhomebrewで入れられるようにするコマンドのこと。~~\n最近はディフォルトでhomebrewに入ってるみたいですね。飛ばしておkです。\n\n- MacTeXの導入\nやっと本題。\n~~結構インストールに時間かかるので筆者のように寝る前にノリで入れるのはやめましょう。~~\n```\n-- Homebrewのアップデート\n$ brew update\n\n-- MacTeXインストール(昔は$ brew cask installだった)\n$ brew install --cask mactex\nPassword: --Macのパスワードが求められる\n\n-- MacTeXがあるか一応確認(昔は$ brew cask listだった)\n$ brew list --cask\n```",
+      "body_updated_at": "2020-12-31"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-31",
+      "body_markdown": "# LaTeX基礎知識\n\n\\documentclass[dvipdfmx]{jsarticle}\n\\begin{document}\n\n吾輩は猫である。名前はまだ無い。\n\nどこで生れたかとんと見当がつかぬ。\n何でも薄暗いじめじめした所で\nニャーニャー泣いていた事だけは記憶している。\n吾輩はここで始めて人間というものを見た。\n\n\\end{document}"
+    }
+  ]
+}

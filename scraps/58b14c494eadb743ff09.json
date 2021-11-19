@@ -1,0 +1,31 @@
+{
+  "title": "書き込み歓迎！ [標準入力/Python]input()とsys.stdin.readline()の違い調査メモ",
+  "closed": false,
+  "archived": false,
+  "created_at": "2020-11-25",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2020-11-26",
+      "body_markdown": "## inputの基本\n\n```\n# main.py\nif __name__ == \"__main__\":\n    hoge = input(\"-->\")\n    print(hoge)\n```\n上記をterminal上で実行してやる\n```\n$ python main.py\n-->fuga # 入力を促すプロンプトが出るので\"fuga\"と入力してみた\nfuga\n```\n※参考\n[公式/input](https://docs.python.org/ja/3/library/functions.html#input)",
+      "body_updated_at": "2020-11-26"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-11-26",
+      "body_markdown": "## sys.stdin.readlineの基本\n\n```\n# main.py\nif __name__ == \"__main__\":\n    hoge = sys.stdin.readline().rstrip()\n    print(hoge)\n    fuga = sys.stdin.readline(2)\n    print(fuga)\n    piyo = sys.stdin.readline(2)\n    print(piyo)\n```\n上記を実行。\n```\n$ python main.py\n[kumamoto python_useful]$ python main.py\nhoge\nhoge\nfuga\nfu\nga\n```\n\nこの結果、\n\n- 引数なしだとユーザー入力のエスケープ文字(改行)も読み取ってしまうこと(rstripを外せばわかる)\n- 数値を引数に入れると変数に受け取れる文字数が決まる。残りの受け取り役がいればそいつに渡してくれる\n\nということ\n\n※参考\n[sys.stdin/公式](https://docs.python.org/ja/3/library/sys.html#sys.stdin)\n\n",
+      "body_updated_at": "2020-11-26"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-11-26",
+      "body_markdown": "## inputとsys.stdin.readlineの違い\n\n| input | sys.stdin.readline |\n| ---- | ---- |\n| inputはユーザーからの標準入力を受け取るがエスケープ文字は受け取らない | readlineはエスケープ文字を含めてユーザーからの標準入力を受け取る |\n| 引数の値をプロンプトとして持つ | readlineはsizeという引数を持つがそれが読み込むバイト数を決定する |\n\n※参考\n[Difference between input() and sys.stdin.readline()](https://www.geeksforgeeks.org/difference-between-input-and-sys-stdin-readline/)\n※未読\n[Python 3: Why teach sys.stdin.readline() over input()?/GitHub](https://github.com/varjmes/noquestionistupid/issues/21)",
+      "body_updated_at": "2020-11-26"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2020-11-27",
+      "body_markdown": "## 調査中情報\n※参考:[angelさん情報](https://twitter.com/angel_p_57/status/1331636662032449537?s=20)\n- 標準入力\n「標準入力」は、入力データでも入力処理でもなくて「入力を司るオブジェクト ( の中で標準で用意済みのもの )」であり、sys .stdin そのもの。\n\n- readline\n～.readline() は、単純にそのオブジェクトのメソッド ( 行読み込み処理 ) を呼んでいるだけ、ファイルを読み込む以下のコードと構図は同じです。\n```\nwith open('hoge.txt','r') as file:\n  line=file.readline()\n  print(line,end=''\n```\n\n- input() \ninputは、標準入力 sys .stdin を使って、対話的な入力処理を行うことを目的にした関数です。\nなのでプロンプト出力できたり、readlineライブラリによる機能強化ができるようになっています。\nなので、似たことができるにしても input() と sys .stdin .readline() は性格が大分違う処理です。\nhttps://docs.python.org/ja/3/library/sys.html#sys.stdin\ninput()、多分とっつきやすいので多用されるのですが、リッチな分遅いので、競プロのような場面では本来不向きです"
+    }
+  ]
+}

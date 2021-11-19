@@ -1,0 +1,13 @@
+{
+  "title": "業務で苦しんだPerlの記録",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-01-19",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-01-19",
+      "body_markdown": "## plenvやPerl-buildはbrewではなくgitで入れてあげよう\nbrewだと「No backend configured for scheme https at /usr/local/Cellar/perl-build/1.25/libexec/lib/perl5/CPAN/Perl/Releases/MetaCPAN.pm line 48.」とあとでエラーが出る。\n\n## plenvに指定のバージョンのPerlをインストールして設定しよう\n\n## plenvでcpanmをインストールする\nsudoでね。\n~/.cpanmの権限\n\n## Cartonを入れる\nsudo cpanm Carton\n\n## その他参考\nhttps://papix.hatenablog.com/entry/2018/03/10/160838\nhttps://bbq-all-stars.github.io/2019/05/01/intellij-perl-environment.html\nhttps://qiita.com/laikuaut/items/82c9b402920e30c2c4eb\n"
+    }
+  ]
+}

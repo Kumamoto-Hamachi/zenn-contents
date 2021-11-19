@@ -1,0 +1,13 @@
+{
+  "title": "MySQLが『Failed to connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock':』とエラーを吐く",
+  "closed": true,
+  "archived": true,
+  "created_at": "2020-12-10",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-10",
+      "body_markdown": "## はじめに\nDBに接続しようとすると下記のようなエラーが出る。\n```\n$ mysql -uroot -pパスワード\n-- 下記のエラーが出る\nFailed to connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock':\n(2003, \"Can't connect to MySQL server on 'localhost' ([Errno 2] No such file or directory)\")\nRetrying over TCP/IP\nmysql 10.5.6-MariaDB\nmycli 1.21.1\nChat: https://gitter.im/dbcli/mycli\nMail: https://groups.google.com/forum/#!forum/mycli-users\nHome: http://mycli.net\nThanks to the contributor - Terje Røsten\n```\n\nまたmysql.serverの状態を確認しようとしても反応がないので『ctrl + d』を\n押すと、下記のようなエラーメッセージが出る。\n```\nERROR! MariaDB is not running, but PID file exists\n```\nPIDファイルがないとのことなので作成する。\nmy.cnfから作成する場所を見てみる...ためにも先にmy.cnfの場所を確認。\n```\n$ mysql --help | grep my.cnf\n/usr/local/etc/my.cnf ~/.my.cnf\n                      order of preference, my.cnf, $MYSQL_TCP_PORT,\n```\nmy.cnfを確認する。\n```\n$ view /usr/local/etc/my.cnf\n#\n# This group is read both both by the client and the server\n# use it for options that affect everything\n#\n[client-server]\n\n#\n# include *.cnf from the config directory\n#\n!includedir /usr/local/etc/my.cnf.d\n```\n"
+    }
+  ]
+}

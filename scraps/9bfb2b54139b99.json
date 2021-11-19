@@ -1,0 +1,18 @@
+{
+  "title": "[bcache or lvmcache]Ubuntuでも容量の小さなSSDをHDDを高速化するキャッシュとして用いたい",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-08-13",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-08-13",
+      "body_markdown": "# 使用PC・OS\n- [Lenovo ideapad 330s 81F5008YJP](http://www.lenovo-smb.com/productinfo/model.php?mtm=81F5008YJP)\nストレージ(HDD)：1TB\nストレージ(SDD)：16GB\n\n- Ubuntu20.04.2 LTS\n\n# 前提：HDDを高速化するキャッシュ用のSSD\nNTEL MEMPEK1J016GAL はOptane™ Memory Series 16GB, M.2 80mm PCIe 3.0, 20nm, 3D Xpoint™。\n独立したドライブとしてではなく HDDを高速化するキャッシュ用に\n装備されているがIntelはHDD高速化用サポートソフトウェアを Windows用にだけ提供してるので\nUbuntuでは 単に16GBのドライブとして扱われる。\n\n2019年1月7日新春特別号　2019年のUbuntuとそれを取り巻く環境：Ubuntu Weekly Topics｜gihyo.jp … 技術評論社\nSSDとHDDの価格逆転，Intel Optaneと新しいメモリモデル\nhttps://gihyo.jp/admin/clip/01/ubuntu-topics/201901/07?page=2#sec5\n"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-08-13",
+      "body_markdown": "# bcacheとlvmcache\n\ndell - bcache for Intel Optane on ubuntu - Ask Ubuntu\nhttps://askubuntu.com/questions/1108547/bcache-for-intel-optane-on-ubuntu\n\nUbuntu - How to use Intel Optane Memory for SSD Caching - CodeNotary\nhttps://www.codenotary.com/blog/ubuntu-how-to-use-intel-optane-memory-for-ssd-caching/"
+    }
+  ]
+}

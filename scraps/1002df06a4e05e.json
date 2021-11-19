@@ -1,0 +1,19 @@
+{
+  "title": "atcoder精進録",
+  "closed": true,
+  "archived": false,
+  "created_at": "2020-12-31",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2020-12-31",
+      "body_markdown": "# abc165-d"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-01-21",
+      "body_markdown": "# 約数関連\n\n## Method \n### 約数の個数を求める\n[素因数分解してそれぞれの累乗+1をかけていくだけ](https://juken-mikata.net/how-to/mathematics/number-of-divisor.html\n)\n\n## Script\n\n### 約数全列挙\n\n```\ndef make_divisors(num):\n    divisors = []\n    num_limit = math.floor(num ** 0.5)\n    for i in range(2, num_limit+1):\n        if num % i == 0:\n            divisors.append(i)\n            quotient = num // i\n            if quotient != i:\n                divisors.append(quotient)\n    return divisors\n```\n\n### 素因数分解 その1 Good\n\n```\ndef prime_factorize(num):\n    primes = []\n    i = 2\n    while num >= i:\n        if num % i == 0:\n            num /= i\n            primes.append(i)\n            i = 1\n        i += 1\n    return primes\n```\n\n### 素因数分解 その2 Not good\n\n```\ndef prime_factorize(num):\n    primes = []\n    limit = math.floor(n ** 0.5)\n    tmp = num\n    print(\"limit\", limit)  # debug\n    for i in range(2, limit+1):\n        if tmp % i == 0:\n            while tmp % i == 0:\n                tmp //= i\n                primes.append(i)\n    if tmp != 1:\n        primes.append(tmp)\n    if primes == []:\n        primes.append(num)\n    return primes\n```\n\n### 素因数分解 その3 dict\n\n```\ndef prime_factorize_in_dict(num):\n    primes = {}\n    i = 2\n    while num >= i:\n        if num % i == 0:\n            num /= i\n            primes.setdefault(i, 0)\n            primes[i] += 1\n            i = 1\n        i += 1\n    return primes\n```\n\n### エラトステネスの篩\n\n[エラトステネスの篩](https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%A9%E3%83%88%E3%82%B9%E3%83%86%E3%83%8D%E3%82%B9%E3%81%AE%E7%AF%A9\n)\n\n```\ndef get_sieve_of_eratosthenes(num):\n    primes = [2]\n    limit = math.floor(num ** 0.5)\n    data = [i + 1 for i in range(2, n, 2)]\n    # print(\"data\", data)  # debug\n    while True:\n        p = data[0]\n        if limit <= p:\n            return primes + data\n        primes.append(p)\n        data = [i for i in data if i % p != 0]\n```",
+      "body_updated_at": "2021-01-21"
+    }
+  ]
+}

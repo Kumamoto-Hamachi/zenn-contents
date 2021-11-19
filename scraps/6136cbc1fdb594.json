@@ -1,0 +1,13 @@
+{
+  "title": "これならわかるJSON/AJAX",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-03-16",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-03-16",
+      "body_markdown": "## この記事について\nJSONとAjaxとは何か、どのように使うものなのか、についてザックリ学ぶ。\n\n\n## 前提\n- HTML/CSSの入門レベルの知識があること\n- JavaScriptの入門レベルの知識があること\n\n\n## ゴール\n\n\n\n\n\n"
+    }
+  ]
+}

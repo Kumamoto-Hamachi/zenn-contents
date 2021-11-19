@@ -1,0 +1,18 @@
+{
+  "title": "[Python]mypyを使う",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-01-10",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-01-10",
+      "body_markdown": "## はじめに 型とPython\n\n\n## mypyって何？\n静的型チェッカー。コードを走らせることなくバグを見つけることが出来るようになります。\n\n\n\n\n## 導入\n\n```\npip install -U mypy\n```\n※install -Uは指定パッケージを可能な限り最新版にする。\n\n\n"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-01-10",
+      "body_markdown": "## 元に\n> 関数は文字列を受け取って文字列を返す関数で、次のようにアノテーションがつけられます\n「アノテーション」とは"
+    }
+  ]
+}

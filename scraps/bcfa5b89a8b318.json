@@ -1,0 +1,31 @@
+{
+  "title": "モノグサな自分が人生改善のためにいつも使っているWebサービス/ブラウザ拡張機能",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-05-29",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-05-29",
+      "body_markdown": "# メモ・ノート系\nzennのスクラップももちろん良く使っていますが、今回はそれ以外を。\n\n## Notion\n技術記事等の長期間腰を据えて取り組む必要のある書き物を作成するときに使用。\nDB機能が非常に便利。ただ使いこなせきれていない。\n\n## Notebook(Zoho)\n日々の思い付きを書く。PDCAを回すのに良い。\n\n## Pocket\nブックマークするほどでもないけど、後で見たいWebページをショートカット一つで保存してくれる。(chrome拡張導入必要)",
+      "body_updated_at": "2021-05-29"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-05-29",
+      "body_markdown": "# ブラウザ操作向上\n基本すべてchrome関連の拡張。\n\n## vimium\nブラウザ操作をvimライクにしてくれる。ちょっとカスタマイズするだけで非常に使い勝手が良くなるので、vimmer以外にもオススメ。(だけどvimmer以外には敬遠されがち...)\n\n## DARK READER\n見ているページをダークモードにすぐに切り替え出来る。特定のページのみダークモードにする・しないの設定も容易。\n\n## Video Speed Controler\nイラチにオススメ。\nYoutubeやUdemyの動画を標準の2倍速以上で見ることが可能に。また15秒飛ばしなどを広告中にも出来る。\nショートカットで楽にスピードアップ・ダウンを出来る。\n※ただしニコ動はこの拡張に対策を入れていて5sほどでスピードを戻してしまう。",
+      "body_updated_at": "2021-05-29"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-05-29",
+      "body_markdown": "# 開発作業向上\nソフトウェア開発の際に使っているもの。\n\n## lucidchart\ndraw.ioと並ぶ作図ツール。\n(今「lucidchart draw.io」でググったら「draw.ioより使いやすいLucidchartで作図」と公式で喧嘩売ってるのを発見した。)\nフリープランでも3つくらいの図を作成可能で、作成した図は様々なフォーマットでダウンロード可能。\n自分は主にER図を作成するのに使用している。\n\n",
+      "body_updated_at": "2021-05-29"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-05-29",
+      "body_markdown": "# 勉強管理\nTODO：ゲーミフィケーションな勉強管理ツール等あれば記載お願いします。\n今の所学生時代から使っているstudy plusを使用しています。"
+    }
+  ]
+}

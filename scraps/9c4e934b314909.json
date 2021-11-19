@@ -1,0 +1,26 @@
+{
+  "title": "Pythonでのスクレイピングメモ",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-04-07",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-04-07",
+      "body_markdown": "https://teratail.com/questions/337700\n\n## その他参考\n- 与えたキーワードを掛け合わせて自動でGoogle検索\nhttps://qiita.com/mckyhrs/items/b0ab0d9caf032b6b2a2a\n- BeautifulSoupの美しさを知りませんでした。実際に使ってみるまでは\nhttps://naruport.com/blog/2019/7/13/how-to-use-of-beautiful-soup-4/\n- BeautifulSoup: what's the difference between 'lxml' and 'html.parser' and 'html5lib' parsers?\nhttps://stackoverflow.com/questions/45494505/beautifulsoup-whats-the-difference-between-lxml-and-html-parser-and-html5\n- html5lib and lxml parsers in Python\nhttps://www.geeksforgeeks.org/html5lib-and-lxml-parsers-in-python/\n- lxml - XML and HTML with Python\nhttps://lxml.de/index.html\n\n## インストール\n```\n$ pip install requests\n$ pip install beautifulsoup4\n$ pip install lxml\n```\n",
+      "body_updated_at": "2021-05-12"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-04-07",
+      "body_markdown": "# 1.HTMLを取得(Requests)\n## 基本\n\n```\nimport requests\n\nif __name__ == \"__main__\":\n    url = \"https://www.python.org/\"\n    res = requests.get(url)\n    print(\"res.url\", res.url)  # str\n    print(\"res.status_code\", res.status_code)  # int e.g.200\n    print(\"res.headers\", res.headers)  # dict\n    print(\"res.encoding\", res.encoding)  # str - utf-8\n    print(\"res.text\", res.text)  # str - html\n```\n\nTODO json \n\n```\n    \"\"\" 動かない\n    headers = {\"content-type\":\"application/json\"}\n    res = requests.get(url, headers=)\n    res.json()\n    \"\"\"\n```",
+      "body_updated_at": "2021-04-07"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-04-07",
+      "body_markdown": "## 2.HTMLを解析(Beautifulsoup)\n\n### 2.1最初のタグから情報を取得する\n\n- まずは下準備\n\n```\nimport requests\nfrom bs4 import BeautifulSoup as bs\nif __name__ == \"__main__\":\n    url = \"https://www.python.org/\"\n    res = requests.get(url)\n    # BeautifulSoupでHTMLを解析する\n    soup = bs(res.text, \"lxml\")\n```\n\n- 最初のタグを取る\n\n```\n    print(\"soup.find('h2')\", soup.find('h2'))  # debug\n    # soup.h2\n```\n\n※ちなみに存在しないタグを.find関数で取得すると`None`が返ってくる。\n\n- タグから文字を取る\n\n```\n    print(\"soup.find('h2').text\", soup.find('h2').text)  # debug\n    # soup.h2.text\n    # soup.find('h2').text\n    # soup.h2.get_text()\n    # soup.find('h2').get_text()\n```\n\n- 実際にやってみる\n\nZennの[わたしの記事](https://zenn.dev/kumamoto/articles/361c906f973f49)のタイトル部分『[第一部]これならわかる！Flask+Nginx+uWSGIをAWSに丁寧にデプロイ』の文字を取得してみる。\n\n```\n    url = \"https://zenn.dev/kumamoto/articles/361c906f973f49\"\n    res = requests.get(url)\n    soup = bs(res.text, \"lxml\")\n    print(\"soup.find('h1').text\", soup.find('h1').text)  # debug\n```\n\n- 補足\n```\n    \"\"\"\n    GuessedAtParserWarning: No parser was explicitly specified, so I'm using the best available HTML parser for\n    this system (\"html.parser\"). This usually isn't a problem, but if you run this code on another system, or in a differe\n    nt virtual environment, it may use a different parser and behave differently.\n    The code that caused this warning is on line 15 of the file main.py. To get rid of this warning, pass the additional ar\n    gument 'features=\"html.parser\"' to the BeautifulSoup constructor.\n    \"\"\"\n```\n\n### 2.2タグを全て取得する\n\n```\nimport requests\nfrom bs4 import BeautifulSoup as bs\n\nif __name__ == \"__main__\":\n    url = \"https://www.python.org/\"\n    res = requests.get(url)\n    soup = bs(res.text, \"lxml\")\n    results = soup.find_all(\"h2\")\n    results_l = [None] * 10\n    for i, r in enumerate(results):\n        results_l[i] = r.text\n\n# ワンライナーな書き方で\n    texts = [html_tag.text for html_tag in soup.find_all(\"h2\")]\n    print(\"texts\", texts)  # debug\n```\n\n",
+      "body_updated_at": "2021-04-07"
+    }
+  ]
+}

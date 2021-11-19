@@ -1,0 +1,18 @@
+{
+  "title": "SQLAlchemyのbackrefの使い方",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-06-20",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-06-20",
+      "body_markdown": "従業員と会社はMany to Oneの関係\n下記のファイルを用意する。(`model.py`という名前にする。名前は任意のもので良い。)\n\n```\nclass Employee(db.Model):\n\n    __tablename__ = \"employees\"\n\n    id = db.Column(db.Integer, primary_key=True)\n    name = db.Column(db.Text)\n    company_id = db.Column(db.Integer, db.ForeignKey(\"companies.id\"))\n\n    def __init__(self, name, company_id):\n        self.name = name\n        self.company_id = company_id\n\n\nclass Company(db.Model):\n\n    __tablename__ = \"companies\"\n\n    id = db.Column(db.Integer, primary_key=True)\n    name = db.Column(db.Text)\n    # One to Many\n    employees = db.relationship(\"Employee\", backref=\"hoge\")\n\n    def __init__(self, name, employee_id):\n        self.name = name\n```\n\n上記でわざとbackrefの値を\"hoge\"にしているが普通はリレーション先の`__tablename__`と同じにする。(employees)\n\n上記を使ってコマンドラインで実験していく。\n\n```\n>>> from model import *\n>>> c = Company(\"dentsu\")\n>>> u1 = Employee(\"kuma\", 1)\n>>> u2 = Employee(\"inu\", 1)\n\n------------\n\n>>> c.employees\n[<Employee (transient 4508130992)>, <Employee (transient 4527577216)>]\n>>> u1.hoge\n<Company (transient 4507245200)>\n>>> u2.hoge\n<Company (transient 4507245200)>\n```\n\n上記のようにMany側がOne側の情報を見るのにbackrefを使う。"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-06-20",
+      "body_markdown": "次にスクリプトを実際に作って試してみる。\n\nDBにデータを入れていく。(スクリプト名は今回`add.py`にする)\n※DBを作る部分は省略(後日追加yotei)\n\n```\nfrom  fuga import *\n\n# create Company\nmicrosoft = Company(\"Microsoft\")  # dbの機能でカンパニーのidは勝手に入ってくれている\napple = Company(\"Apple\")\n\n\n# create Employee\nkuma = Employee(\"Kuma\", microsoft.id)\ninu = Employee(\"Inu\", microsoft.id)\nsaru = Employee(\"Saru\", apple.id)\n\n\n# add employees\ndb.session.add_all([kuma, inu, saru]) # dbの機能でユーザーのidは勝手に入ってくれている\ndb.session.commit()\n```\n\n上記の`add.py`を実行。\n\n次にデータの読み取りを行う。\n\n```\nfrom fuga import db, Employee, Project, Company\n\n# Employeeからの紐付け\nfor e in Employee.query.all():\n    print(e.name)\n    print(e.companies.name)\n\n# Companyからの紐付け\nfor c in Company.query.all():\n    print(c.name)\n    print(c.employees[0].name)\napp.config[\"SQLALCHEMY_ECHO\"] = True  # SQLを表示\n\n```"
+    }
+  ]
+}

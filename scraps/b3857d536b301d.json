@@ -1,0 +1,20 @@
+{
+  "title": "Javaを急いで学んだ記録",
+  "closed": false,
+  "archived": false,
+  "created_at": "2021-04-12",
+  "comments": [
+    {
+      "author": "kumamoto",
+      "created_at": "2021-04-12",
+      "body_markdown": "# [事前準備 SDKMANでJavaインストール](https://sdkman.io/install)\n[安定版のインストールはこちら](https://sdkman.io/usage)\n\n# [Javaの基本](https://java.keicode.com/lang/how-to-compile-basic.php)\n\n# [ジェネリクス](https://java.keicode.com/lang/generics-why-generics.php)",
+      "body_updated_at": "2021-04-20"
+    },
+    {
+      "author": "kumamoto",
+      "created_at": "2021-04-16",
+      "body_markdown": "## Groovyの基本\n Apacheソフトウェアfoundation配下で開発が進められている 動的型付け言語(Javaの方言)。JVM上で動作する。REPL(Read Eval Print Loop：対話式で実行出来る実行環境)もある。\nGroovyは2015年11月より、 Apacheソフトウェアファウンデーションのトップレベルプロジェクト となった。\n```\n-- 今回は使わないが。。。\ngroovyConsole &\n```\n\n### assertを使う\n```\n```\n\n\n## Groovyのインストール\n```\nsdk install groovy\n```\n\n## Groovy超入門\n```\ngroovyc hoge.groovy\n\n-- hoge.groovyの中身\nclass Foo{\n    static main(args) {\n        println \"This is Foo class in hoge.groovy\"\n    }\n}\n\nprintln \"Out of Foo\"\n```\nクラスとして宣言されている部分はそのクラス名.class、クラスの外側に記述されている部分はそのファイル名.classというファイル名になる=>Foo.classとhoge.classが出来る。\n```\n[1,2,3].each {\n    println it\n}\n```\nクロージャの中ではitという暗黙の変数があって、渡される引数が一つの場合、自動的にこのitという変数に格納されます。\n```\nClosure clj2 = {String name ->\n    println \"Hello ${name}!\"\n}\n```\nクロージャは{何か処理}、もしくは{引数 -> 何か処理}\n\nクロージャを 生まれ故郷（クロージャ自身が定義された場所）を忘れない無名関数\n=>よりわかりやすく言うと「[外側の変数を記憶した関数](https://qiita.com/naomi7325/items/57d141f2e56d644bdf5f)」\n\n[task hoge <<の意味](https://www.kannon.link/fuku/index.php/2016/09/28/01-10/)\n```\ntask helloWorld << {\n        println \"Hello, world!\"\n}\n```\n「 << 」 なし —> 設定フェーズで実行される\n「 << 」 あり —> 実行フェーズで実行される\n\n- クロージャーの合成\nGroovyでは、クロージャ同士を>>もしくは<<で順番に結合した新しいクロージャを生成できます。それぞれのクロージャの実行結果が次のクロージャにそのまま渡されます。\nこれがGroovyの関数合成です。\n```\nClosure toInt = {String v ->\n    v.toInteger()\n}\nClosure twice = {Integer v ->\n    v * 2\n}\n\n// サンプル用に分かりやすく\nClosure getDataFromDatabase = {\n    \"5\"\n}\nassert 10 == twice(toInt(getDataFromDatabase()))\n\nClosure calc1 = getDataFromDatabase >> toInt >> twice\nClosure calc2 = twice << toInt << getDataFromDatabase\nassert 10 == calc1()\nassert 10 == calc2()\n```\n\n=>より詳しくは「[Gradle入門](https://qiita.com/vvakame/items/83366fbfa47562fafbf4)」を参考に",
+      "body_updated_at": "2021-04-27"
+    }
+  ]
+}
