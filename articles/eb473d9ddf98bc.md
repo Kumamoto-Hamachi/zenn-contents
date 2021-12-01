@@ -1,5 +1,5 @@
 ---
-title: "[pyenv/poetryでお気楽環境構築してみた]poetryで作った仮想環境で指定したバージョンになっていない(T_T)=>cacheが残っていただけでした(＾ω＾)"
+title: "[pyenv/poetryでお気楽環境構築してみた]poetryで指定したバージョンになっていない=>キャッシュが残ってただけ"
 emoji: "📝"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["python", "poetry", "pyenv", "環境構築"]
